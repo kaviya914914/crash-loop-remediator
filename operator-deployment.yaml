@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crash-loop-remediator
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crash-loop-remediator
+  template:
+    metadata:
+      labels:
+        app: crash-loop-remediator
+    spec:
+      serviceAccountName: crash-loop-remediator
+      containers:
+      - name: operator
+        image: crash-loop-remediator:v1
+        imagePullPolicy: Never
